@@ -18,6 +18,7 @@ class StudentController extends Controller
         return response($students);
     }
 
+
     /**
      * Store a newly created resource in storage.
      *

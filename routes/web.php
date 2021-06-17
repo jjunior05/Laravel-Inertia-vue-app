@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\PagesController;
 use App\Http\Controllers\TesteController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/courses', [CourseController::class, 'index']);
-Route::post('/courses', [CourseController::class, 'store']);
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/dashboard', [PagesController::class, 'dashboard'])->name('dashboard');
+    Route::get('/students', [PagesController::class, 'students'])->name('students');
+});
 
+
+// Route::middleware(['auth:sanctum', 'verified'])->get('/students', function () {
+//     return Inertia\Inertia::render('Students');
+// })->name('students');
+
+// Route::get('/', function(){
+//     return view('welcome');
+// });
+// Route::get('/students', [CourseController::class, 'index']);
+// Route::get('/courses', [CourseController::class, 'index']);
+// Route::post('/courses', [CourseController::class, 'store']);

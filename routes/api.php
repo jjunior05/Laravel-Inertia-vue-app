@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::apiResource('students', 'App\Http\Controllers\StudentController');
+Route::apiResource('courses', 'App\Http\Controllers\CourseController');
 
-Route::post('/teste', [TesteController::class, 'test']);
-Route::post('/teste', [TesteController::class, 'test']);
-Route::get('/getStudents', [StudentController::class, 'index']);
+// Route::post('/teste', [TesteController::class, 'test']);
+// Route::post('/teste', [TesteController::class, 'test']);
+// Route::get('/getStudents', [StudentController::class, 'index']);

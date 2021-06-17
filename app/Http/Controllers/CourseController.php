@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CourseController extends Controller
 {
@@ -26,18 +27,10 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'price' => 'required',
-            'is_ative' => 'required|in:true,false',
-            'date_enrollment' => 'required'
-        ], [
-            'name.required' => 'Campo name é obrigatório!',
-            'price.required' => 'Campo price é obrigatório!',
-            'is_ative.required' => 'Campo is_ative é obrigatório!',
-            'is_ative.min' => 'Campo is_ative true ou false!',
-            'date_enrollment.required' => 'Campo date_enrollment é obrigatório!'
-        ]);
+        if (!$request->has('name')) return response("Campo name é obrigatório!");
+        if (!$request->has('email')) return response("Campo email é obrigatório!");
+        if (!$request->has('age')) return response("Campo age é obrigatório!");
+        if (!$request->has('date_enrollment')) return response("Campo date_enrollment é obrigatório!");
 
         $course = new Course();
         $course->name = $request->name;
