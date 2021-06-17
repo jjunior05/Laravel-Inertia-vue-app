@@ -18,6 +18,7 @@ class CreateCoursesTable extends Migration
             $table->string('name');
             $table->decimal('price');
             $table->boolean('is_ative')->default(false);
+            $table->date('date_enrollment');
             $table->timestamps();
         });
     }

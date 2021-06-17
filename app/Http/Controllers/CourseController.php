@@ -29,18 +29,21 @@ class CourseController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'price' => 'required',
-            'is_ative' => 'required|in:true,false'
+            'is_ative' => 'required|in:true,false',
+            'date_enrollment' => 'required'
         ], [
             'name.required' => 'Campo name é obrigatório!',
             'price.required' => 'Campo price é obrigatório!',
             'is_ative.required' => 'Campo is_ative é obrigatório!',
-            'is_ative.min' => 'Campo is_ative true ou false!'
+            'is_ative.min' => 'Campo is_ative true ou false!',
+            'date_enrollment.required' => 'Campo date_enrollment é obrigatório!'
         ]);
 
         $course = new Course();
         $course->name = $request->name;
         $course->price = $request->email;
         $course->is_ative = $request->age;
+        $course->date_enrollment = $request->date_enrollment;
 
         $course->save();
 
