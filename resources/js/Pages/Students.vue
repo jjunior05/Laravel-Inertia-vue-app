@@ -110,7 +110,10 @@
                                                 divide-y divide-gray-200
                                             "
                                         >
-                                            <tr>
+                                            <tr
+                                                v-for="student in students"
+                                                :key="student.id"
+                                            >
                                                 <td
                                                     class="
                                                         px-6
@@ -124,8 +127,7 @@
                                                             text-gray-900
                                                         "
                                                     >
-                                                        Regional Paradigm
-                                                        Technician
+                                                        {{ student.name }}
                                                     </div>
                                                     <div
                                                         class="
@@ -133,7 +135,7 @@
                                                             text-gray-500
                                                         "
                                                     >
-                                                        Optimization
+                                                        {{ student.email }}
                                                     </div>
                                                 </td>
                                                 <td
@@ -143,7 +145,7 @@
                                                         whitespace-nowrap
                                                     "
                                                 >
-                                                    teste@teste.br
+                                                    {{ student.email }}
                                                     <!-- <span
                                                         class="
                                                             px-2
@@ -167,7 +169,7 @@
                                                         text-sm text-gray-500
                                                     "
                                                 >
-                                                    teste
+                                                    {{ student.age }}
                                                 </td>
                                                 <td
                                                     class="
@@ -177,7 +179,7 @@
                                                         text-sm text-gray-500
                                                     "
                                                 >
-                                                    01/01/2021
+                                                    {{ student.course }}
                                                 </td>
                                                 <td
                                                     class="
@@ -229,13 +231,159 @@
         </div>
         <template #footer>
             <button
-                class="btn btn-secondary btn-lg"
-                data-toggle="modal"
-                data-target="addStudent"
+                class="
+                    bg-blue-600
+                    text-white
+                    px-4
+                    py-2
+                    text-sm
+                    uppercase
+                    tracking-wide
+                    font-bold
+                    rounded-lg
+                "
+                @click="showing = true"
             >
-                Launch
+                Add Student
             </button>
+            <div
+                v-if="showing"
+                class="
+                    fixed
+                    inset-0
+                    w-full
+                    h-screen
+                    flex
+                    items-center
+                    justify-center
+                    bg-semi-75
+                "
+            >
+                <div
+                    class="
+                        relative
+                        w-full
+                        max-w-2xl
+                        bg-white
+                        shadow-lg
+                        rounded-lg
+                        p-8
+                    "
+                >
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <form
+                                        @submit.prevent="addStudent"
+                                        method="POST"
+                                    >
+                                        <div class="form-group">
+                                            <label for="name">Full Name</label>
+                                            <input
+                                                type="text"
+                                                v-model="student.name"
+                                                class="form-control"
+                                                name="name"
+                                                id="name"
+                                                placeholder="Enter the course name"
+                                            />
+                                            <small
+                                                id="helIp"
+                                                class="fomr-text text-muted"
+                                                >Enter your Full name</small
+                                            >
+                                        </div>
 
+                                        <div class="form-group">
+                                            <label for="Age">Age</label>
+                                            <input
+                                                type="text"
+                                                v-model="student.age"
+                                                class="form-control"
+                                                name="price"
+                                                id="price"
+                                                placeholder="Enter the price"
+                                            />
+                                            <small
+                                                id="helIp"
+                                                class="fomr-text text-muted"
+                                                >Enter your age</small
+                                            >
+                                        </div>
+                                        <div class="form-">
+                                            <label for="course">Active</label>
+                                            <select
+                                                name="course"
+                                                v-model="course.course"
+                                                id="course"
+                                            >
+                                                <option selected>
+                                                    Choice your course
+                                                </option>
+                                                <option
+                                                    :value="course.id"
+                                                    v-for="course in courses"
+                                                    :key="course.id"
+                                                >
+                                                    {{ course.name }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="form-">
+                                            <label for="course">Active</label>
+                                            <select
+                                                name="course"
+                                                v-model="course.course_is_ative"
+                                                id="course"
+                                            >
+                                                <option selected value="yes">
+                                                    Yes
+                                                </option>
+                                                <option value="no">No</option>
+                                            </select>
+                                        </div>
+                                        <button
+                                            type="submit"
+                                            class="btn btn-primary"
+                                        >
+                                            Salvar
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button
+                                    class="btn btn-secondary"
+                                    type="button"
+                                    @click="showing = false"
+                                >
+                                    Close
+                                </button>
+                                <button class="btn btn-primary" type="submit">
+                                    Salvar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button
+                        aria-label="close"
+                        @click="showing = false"
+                        class="
+                            absolute
+                            top-0
+                            right-0
+                            text-xl text-gray-500
+                            my-2
+                            mx-4
+                        "
+                        @click.prevent="close"
+                    >
+                        ×
+                    </button>
+                    <slot />
+                </div>
+            </div>
             <!-- Modal Add a new Student -->
             <div
                 class="modal fade"
@@ -264,13 +412,13 @@
                                     method="POST"
                                 >
                                     <div class="form-group">
-                                        <label for="full_name">Full Name</label>
+                                        <label for="name">Full Name</label>
                                         <input
                                             type="text"
-                                            v-model="student.full_name"
+                                            v-model="student.name"
                                             class="form-control"
-                                            name="course_name"
-                                            id="course_name"
+                                            name="name"
+                                            id="name"
                                             placeholder="Enter the course name"
                                         />
                                         <small
@@ -306,7 +454,13 @@
                                             <option selected>
                                                 Choice your course
                                             </option>
-                                            <option value=""></option>
+                                            <option
+                                                :value="course.id"
+                                                v-for="course in courses"
+                                                :key="course.id"
+                                            >
+                                                {{ course.name }}
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="form-">
@@ -449,6 +603,12 @@
 <script>
 import AppLayout from "@/Layouts/AppLayout";
 export default {
+    props: {
+        showing: {
+            required: true,
+            type: Boolean,
+        },
+    },
     components: {
         AppLayout,
     },
@@ -457,12 +617,12 @@ export default {
         return {
             students: [],
             student: {
-                full_name: "",
+                name: "",
                 age: "",
                 email: "",
                 course: "",
             },
-            course: [],
+            courses: [],
             course: {
                 name: "",
                 price: "",
@@ -472,18 +632,47 @@ export default {
         };
     },
     methods: {
+        close() {
+            this.$emit("close");
+        },
         async addStudent() {
             const resp = await axios.post("/api/students", this.students);
-            if (resp.status == 200) {
+            if (resp.status == 201) {
                 Toast.fire({
-                    icon: 'success',
+                    icon: "success",
                     title: resp.data,
                 });
             }
         },
-        getStudents() {},
-        addCourse() {},
-        getCourses() {},
+        async getStudents() {
+            axios
+                .get("/api/students")
+                .then((resp) => {
+                    this.students = resp.data;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+        async addCourse() {
+            const resp = await axios.post("/api/courses", this.course);
+            if (resp.status == 201) {
+                Toast.fire({
+                    icon: "success",
+                    title: resp.data,
+                });
+            }
+        },
+        async getCourses() {
+            axios
+                .get("/api/courses")
+                .then((resp) => {
+                    this.courses = resp.data;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
     },
 };
 </script>
