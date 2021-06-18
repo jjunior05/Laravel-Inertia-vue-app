@@ -270,87 +270,79 @@
                         p-8
                     "
                 >
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <div class="container-fluid">
-                                    <form
-                                        @submit.prevent="addStudent"
-                                        method="POST"
-                                    >
-                                        <div class="form-group">
-                                            <label for="name">Full Name</label>
-                                            <input
-                                                type="text"
-                                                v-model="student.name"
-                                                class="form-control"
-                                                name="name"
-                                                id="name"
-                                                placeholder="Enter the course name"
-                                            />
-                                            <small
-                                                id="helIp"
-                                                class="fomr-text text-muted"
-                                                >Enter your Full name</small
-                                            >
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="Age">Age</label>
-                                            <input
-                                                type="text"
-                                                v-model="student.age"
-                                                class="form-control"
-                                                name="price"
-                                                id="price"
-                                                placeholder="Enter the price"
-                                            />
-                                            <small
-                                                id="helIp"
-                                                class="fomr-text text-muted"
-                                                >Enter your age</small
-                                            >
-                                        </div>
-                                        <div class="form-">
-                                            <label for="course">Active</label>
-                                            <select
-                                                name="course"
-                                                v-model="course.course"
-                                                id="course"
-                                            >
-                                                <option selected>
-                                                    Choice your course
-                                                </option>
-                                                <option
-                                                    :value="course.id"
-                                                    v-for="course in courses"
-                                                    :key="course.id"
-                                                >
-                                                    {{ course.name }}
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="form-">
-                                            <label for="course">Active</label>
-                                            <select
-                                                name="course"
-                                                v-model="course.course_is_ative"
-                                                id="course"
-                                            >
-                                                <option selected value="yes">
-                                                    Yes
-                                                </option>
-                                                <option value="no">No</option>
-                                            </select>
-                                        </div>
-                                        <button
-                                            type="submit"
-                                            class="btn btn-primary"
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <form
+                                    @submit.prevent="addStudent"
+                                    method="POST"
+                                >
+                                    <div class="form-group">
+                                        <label for="name">Full Name</label>
+                                        <input
+                                            type="text"
+                                            v-model="student.name"
+                                            class="form-control"
+                                            name="name"
+                                            id="name"
+                                            placeholder="Enter the course name"
+                                        />
+                                        <small
+                                            id="helIp"
+                                            class="fomr-text text-muted"
+                                            >Enter your Full name</small
                                         >
-                                            Salvar
-                                        </button>
-                                    </form>
-                                </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="Age">Age</label>
+                                        <input
+                                            type="text"
+                                            v-model="student.age"
+                                            class="form-control"
+                                            name="price"
+                                            id="price"
+                                            placeholder="Enter the price"
+                                        />
+                                        <small
+                                            id="helIp"
+                                            class="fomr-text text-muted"
+                                            >Enter your age</small
+                                        >
+                                    </div>
+                                    <div class="form-">
+                                        <label for="course">Active</label>
+                                        <select
+                                            name="course"
+                                            v-model="course.course"
+                                            id="course"
+                                        >
+                                            <option selected>
+                                                Choice your course
+                                            </option>
+                                            <option
+                                                :value="course.id"
+                                                v-for="course in courses"
+                                                :key="course.id"
+                                            >
+                                                {{ course.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-">
+                                        <label for="course">Active</label>
+                                        <select
+                                            name="course"
+                                            v-model="course.course_is_ative"
+                                            id="course"
+                                        >
+                                            <option selected value="yes">
+                                                Yes
+                                            </option>
+                                            <option value="no">No</option>
+                                        </select>
+                                    </div>
+                                </form>
                             </div>
                             <div class="modal-footer">
                                 <button
@@ -599,7 +591,16 @@
         </template>
     </app-layout>
 </template>
-
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+    transition: all 0.4s;
+}
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+}
+</style>
 <script>
 import AppLayout from "@/Layouts/AppLayout";
 export default {
