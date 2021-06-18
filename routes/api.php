@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TesteController;
 use App\Models\Students;
@@ -16,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::get('/', [CourseController::class, 'index']);
 
 Route::apiResource('students', 'App\Http\Controllers\StudentController');
 Route::apiResource('courses', 'App\Http\Controllers\CourseController');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -15,7 +16,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $course = Course::all();
+        $course = User::all();
         return response($course, 200);
     }
 
